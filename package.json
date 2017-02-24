@@ -1,0 +1,31 @@
+{
+  "name": "gapbot",
+  "version": "1.0.0",
+  "description": "A bot that works as a bridge between irc and slack",
+  "main": "dist/index.js",
+  "scripts": {
+    "gulp": "bash -c \"gulp\"",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "slack",
+    "irc"
+  ],
+  "author": "Julius Rajala",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/debug": "0.0.29",
+    "@types/express": "^4.0.35",
+    "@types/node": "^7.0.5",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.1.5",
+    "typescript": "^2.2.1"
+  },
+  "engines": {
+    "node": "7.0.0"
+  },
+  "dependencies": {
+    "debug": "^2.6.1",
+    "express": "^4.14.1"
+  }
+}
