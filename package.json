@@ -4,7 +4,7 @@
   "description": "A bot that works as a bridge between irc and slack",
   "main": "dist/index.js",
   "scripts": {
-    "gulp": "bash -c \"gulp\"",
+    "gulp": "bash -c \"cp -R src/add_to_slack.html dist && gulp\"",
     "start": "node dist/index.js"
   },
   "keywords": [
@@ -19,6 +19,7 @@
     "@types/irc": "^0.3.32",
     "@types/morgan": "^1.7.32",
     "@types/node": "^7.0.5",
+    "@types/request": "0.0.40",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.5",
     "typescript": "^2.2.1"
@@ -30,6 +31,7 @@
     "debug": "^2.6.1",
     "express": "^4.14.1",
     "irc": "^0.5.2",
-    "morgan": "^1.8.1"
+    "morgan": "^1.8.1",
+    "request": "^2.79.0"
   }
 }
