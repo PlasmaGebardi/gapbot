@@ -2,10 +2,13 @@ import * as irc from 'irc'
 
 class Ircbot {
 
+  ircChannel: string = process.env.IRC_CHANNEL || '#gapbot';
+  ircNick: string = process.env.IRC_NICK || 'JuMaBot';
+  ircServer: string = process.env.IRC_SERVER || 'irc.cc.tut.fi';
   client: any;
 
   constructor() {
-    this.client = new irc.Client('irc.cc.tut.fi', 'gapbot', { 
+    this.client = new irc.Client(this.ircServer, this.ircNick, { 
       autoConnect: false,
       debug: true,
       showErrors: true
@@ -16,17 +19,31 @@ class Ircbot {
     this.client.opt.millisecondsBeforePingTimeout = 40000;
 
     this.init();
+    this.initListeners();
 
-    this.client.addListener('pm', function (from, message) {
+    this.client.addListener('error', function(message) {
+      console.log('error: ', message);
+    });
+  }
+
+  public init() {
+    this.client.connect(2, () => this.joinChannel(this.ircChannel));
+  }
+
+  public initListeners() {
+    // TODO: get listeners from config file
+
+    // private message listener
+    this.client.addListener('pm', (from, message) => {
       console.log(from + ' : ' + message);
       if (from == 'PlasmaGebardi' || from == 'Lorenz0') {
-        this.client.say('#gapbot', from + ' sano ' + message);
+        this.client.say(this.ircChannel, from + ' sano ' + message);
       } else {
         this.client.say(from, 'UNAUTHORIZED BITCH');
       }
     });
 
-    this.client.addListener('message#gapbot', function (from, message) {
+    this.client.addListener('message#gapbot', (from, message) => {
       console.log(from + ' to #gapbot: ' + message);
       if (message[0] == '!') {
         console.log('Incoming command :O');
@@ -39,24 +56,7 @@ class Ircbot {
         }
       }
     });
-
-    this.client.addListener('error', function(message) {
-      console.log('error: ', message);
-    });
   }
-
-  public init() {
-    this.client.connect(2, () => this.joinChannel('#gapbot'));
-  }
-
-/*  public init() {
-    this.client.connect(2, function(input) {
-      console.log('Connected to server');
-      this.client.join('#gapbot', function(input) {
-        console.log('Joined to channel');
-      });
-    });
-  }*/
 
   public getClient() {
     return this.client;
@@ -74,10 +74,5 @@ class Ircbot {
     this.client.say(chan, msg);
   }
 }
-
-//const bot = new Ircbot();
-//bot.joinChannel('#gapbot');
-//bot.sendMsg('Derp durp');
-//bot.partChannel('#gapbot');
 
 export default new Ircbot();
