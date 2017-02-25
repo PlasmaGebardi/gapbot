@@ -8,7 +8,7 @@ The bot requires a set of environment values to work correctly. When running loc
 
 Here's an example, replace the stars with your desires keys.
 
-    export CLIENT_ID=*
+    export CLIENT_ID=*
     export CLIENT_SECRET=*
     export REDIRECT_URI=*
     export IRC_SERVER=*
