@@ -4,7 +4,7 @@
   "description": "A bot that works as a bridge between irc and slack",
   "main": "dist/index.js",
   "scripts": {
-    "gulp": "bash -c \"cp -R src/add_to_slack.html dist && gulp\"",
+    "gulp": "bash -c \"mkdir -p dist && cp src/add_to_slack.html dist/ && gulp\"",
     "start": "node dist/index.js"
   },
   "keywords": [
