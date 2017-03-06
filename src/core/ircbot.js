@@ -1,3 +1,4 @@
+// DERPRECATED: use ircbot.ts instead
 var irc = require('irc');
 var client = new irc.Client('irc.cc.tut.fi', 'gapbot', {
     autoConnect: false,
@@ -23,10 +24,6 @@ client.connect(2, function(input) {
     console.log('Joined to channel');
   });
 });
-
-//client.connect()
-//client.join('#gapbot');
-//client.say('#gapbot', 'derpdurp');
 
 client.addListener('pm', function (from, message) {
   console.log(from + ' : ' + message);
